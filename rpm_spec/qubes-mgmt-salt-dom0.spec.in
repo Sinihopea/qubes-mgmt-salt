@@ -1,43 +1,51 @@
 
-Name:      qubes-mgmt-salt-dom0
-Version:   @VERSION@
-Release:   1%{?dist}
-Summary:   Qubes+Salt Management dom0 dependencies
-License:   GPL 2.0
-URL:	   http://www.qubes-os.org/
+Name:		qubes-mgmt-salt-dom0
+Version:	@VERSION@
+Release:	1%{?dist}
+Summary:	Qubes+Salt Management dom0 dependencies
+License:	GPL 2.0
+URL:		http://www.qubes-os.org/
 
-Group:     System administration tools
-BuildArch: noarch
-Requires:  qubes-mgmt-salt
-Requires:  qubes-mgmt-salt-dom0-qvm
-Requires:  qubes-mgmt-salt-dom0-update
-Requires:  qubes-mgmt-salt-dom0-virtual-machines
-BuildRequires: python%{python3_pkgversion}-pyyaml
-BuildRequires: tree
-Conflicts:  qubes-mgmt-salt-vm
+Group:		System administration tools
+BuildArch:	noarch
+Requires:	qubes-mgmt-salt
+Requires:	qubes-mgmt-salt-dom0-qvm
+Requires:	qubes-mgmt-salt-dom0-update
+Requires:	qubes-mgmt-salt-dom0-virtual-machines
+%if 0%{?suse_version} == 1500 && 0%{?is_opensuse}
+BuildRequires:	python3-PyYAML
+%else
+BuildRequires:	python%{python3_pkgversion}-pyyaml
+%endif
+BuildRequires:	tree
+Conflicts:	qubes-mgmt-salt-vm
 
 # workaround for saltstack/salt#53570
 # until we have salt >= 2019.2.2 in dom0
-Requires: python%{python3_pkgversion}-pip
+%if 0%{?suse_version} == 1500 && 0%{?is_opensuse}
+Requires:	python3-pip
+%else
+Requires:	python%{python3_pkgversion}-pip
+%endif
 
 # Prevent specific R4.0 overrides to remain
 # during migration process
-Obsoletes: qubes-mgmt-salt-base-overrides < 4.1.0
+Obsoletes:	qubes-mgmt-salt-base-overrides < 4.1.0
 
-Source0: qubes-mgmt-salt-%{version}.tar.gz
+Source0:	qubes-mgmt-salt-%{version}.tar.gz
 
 %description
 Qubes+Salt Management dom0 dependencies.
 
 %package formulas
-Summary:   All Qubes+Salt Management dom0 formulas
-Group:     System administration tools
-BuildArch: noarch
-Requires:  qubes-mgmt-salt
-Requires:  qubes-mgmt-salt-dom0
-Requires:  qubes-mgmt-salt-dom0-qvm
-Requires:  qubes-mgmt-salt-dom0-update
-Requires:  qubes-mgmt-salt-dom0-virtual-machines
+Summary:	All Qubes+Salt Management dom0 formulas
+Group:		System administration tools
+BuildArch:	noarch
+Requires:	qubes-mgmt-salt
+Requires:	qubes-mgmt-salt-dom0
+Requires:	qubes-mgmt-salt-dom0-qvm
+Requires:	qubes-mgmt-salt-dom0-update
+Requires:	qubes-mgmt-salt-dom0-virtual-machines
 
 %description formulas
 Qubes+Salt Management dom0 formulas.
